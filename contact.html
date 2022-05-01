@@ -14,6 +14,19 @@
       <div><a href="contact.html">Contact List</a></div>
       <div><a href="favourites.html">Favourites</a></div>
     </div>
+    
+     <select  id="sortNames" onChange="handleNamesSort()">
+      <option >Sort By Names</option>
+      <option value="asc">Ascending</option>
+      <option value="dsc">Decending</option>
+    </select>
+
+    <select  id="sortType" onChange="handleTypeSort()">
+      <option >Sort By Type</option>
+      <option value="Family">Family</option>
+      <option value="Friends">Freind</option>
+      <option value="Others">Others</option>
+    </select>
     <main>
       <table>
         <thead>
@@ -36,6 +49,42 @@
 
     var contactArr=JSON.parse(localStorage.getItem("contactList"))||[];
     displaydata(contactArr);
+    
+     function handleNamesSort(){
+      var selected=document.querySelector("#sortNames").value
+
+      if(selected=="asc"){
+        contactArr.sort(function(a,b){
+         var x=a.Name.toUpperCase();
+         var y=b.Name.toUpperCase();
+         if(x>y){
+           return 1;
+         }
+         if(x<y){
+           return -1;
+         }
+         return 0;
+        });
+        displaydata(contactArr)
+      }
+
+      if(selected=="dsc"){
+        contactArr.sort(function(a,b){
+         var x=a.Name.toUpperCase();
+         var y=b.Name.toUpperCase();
+         if(x>y){
+           return -1;
+         }
+         if(x<y){
+           return 1;
+         }
+         return 0;
+        });
+        displaydata(contactArr)
+      }
+    }
+
+    function handleTypeSort(){
 
     var favourites=JSON.parse(localStorage.getItem("favourites"))||[];
 
